@@ -25,6 +25,4 @@ for i in range(1000):
 
 correct = tf.equal(tf.argmax(y,1),tf.argmax(y_,1))
 accuracy = tf.reduce_mean(tf.cast(correct,"float"))
-print sess.run(accuracy,feed_dict={x:mnist.test.images,y_:mnist.test.labels})
-
-
+print(sess.run(accuracy,feed_dict={x:mnist.test.images,y_:mnist.test.labels}))
