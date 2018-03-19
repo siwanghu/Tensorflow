@@ -58,13 +58,15 @@ init = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(init)
 
-for i in range(500):
-    batch_xs,batch_ys = mnist.train.next_batch(100)
-    sess.run(train_step,feed_dict={x:batch_xs,y_:batch_ys,keep_prob: 1.0})
+for i in range(5000): #开始训练模型，循环训练5000次
+    batch = mnist.train.next_batch(50) #batch大小设置为50
+    if i % 100 == 0:
+        train_accuracy = accuracy.eval(session = sess,feed_dict = {x:batch[0], y_:batch[1], keep_prob:1.0})
+    print("step %d, train_accuracy %g" %(i, train_accuracy))
+    train_step.run(session = sess, feed_dict = {x:batch[0], y_:batch[1],keep_prob:0.5}) #神经元输出保持不变的概率 keep_prob 为0.5
+    print(batch[0],batch[1])
     
-for i in range(10): 
-    test= mnist.test.next_batch(100)  
-    print(sess.run(accuracy,feed_dict={x:test[0],y_:test[1],keep_prob: 1.0}))
+print("test accuracy %g" %accuracy.eval(session = sess,feed_dict = {x:mnist.test.images, y_:mnist.test.labels,keep_prob:1.0})) #神经元输出保持不变的概率 keep_prob 为 1，即不变，一直保持输出
     
     
     
