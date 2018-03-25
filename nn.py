@@ -50,22 +50,3 @@ for i in range(2000):
         pre_value = sess.run(pre, feed_dict={x: x_train})
         lines=ax.plot(x_train.reshape(200), pre_value.reshape(200), 'r-', lw=5)
         plt.pause(0.2)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
